@@ -1,43 +1,34 @@
 import { useRouter } from 'next/router'
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
+import { useAuthContext } from '../context/Auth'
 
-const CampaignContent = () => {
-	const initialState = {
-		promotionURL: '',
-		marketingObjective: '',
-		targeting: '',
-		dailyBudget: '',
-		costPerClick: '',
-		companyName: '',
-		firstName: '',
-		lastName: '',
-		address1: '',
-		address2: '',
-		city: '',
-		state: '',
-		zipcode: '',
-		country: ''
-	}
-	const [data, setData] = useState(initialState)
-	const [file, setFile] = useState()
-	const preview = useRef()
+const CampaignContent = ({ edit }) => {
+	const { data, setData, file, setFile } = useAuthContext()
 	const handleLogoChange = (e) => {
 		setFile(e.target.files[0])
 	}
 	const router = useRouter()
+
+	const handleFormInput = (evt) => {
+		const value = evt.target.value;
+		setData({
+			...data,
+			[evt.target.name]: value
+		});
+	}
 	return (
 		<>
 			<Sidebar />
 			<Topbar />
 			<div className='bg-white hidden lg:block left-position absolute top-24 mt-2 px-5 py-6 Nunito w-10/12 justify-center items-center h-calc-height'>
-				<h1 className='font-bold text-4xl'>Create Campaign</h1>
+				<h1 className='font-bold text-4xl'>{edit ? 'View Campaign' : 'Create Campaign'}</h1>
 				<div className='mt-12 px-4 w-full flex justify-between h-4/5'>
 					<div className='w-1/2 h-full'>
 						<div className='flex flex-col'>
 							<label className='font-bold cursor-pointer' htmlFor='promotionURL'>Enter the page you want to promote: </label>
-							<input type="text" id="promotionURL" placeholder='http://www.my-url.com/design' className='outline-none w-3/4 px-3 py-2 rounded-lg border-2 border-gray-400 mt-2' name='promotionURL' />
+							<input onChange={handleFormInput} value={data.promotionURL} type="text" id="promotionURL" placeholder='http://www.my-url.com/design' className='outline-none w-3/4 px-3 py-2 rounded-lg border-2 border-gray-400 mt-2' name='promotionURL' />
 							<p className='text-xs text-gray-500 mt-2'>*This can be an article, homepage or any URL.</p>
 						</div>
 						<div className='flex flex-col mt-12'>

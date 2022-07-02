@@ -10,8 +10,27 @@ const AuthContext = createContext();
 export function AuthContextProvider({ children }) {
 	const [user, setUser] = useState()
 	const router = useRouter()
+	const [file, setFile] = useState()
 	const [alert, setAlert] = useState('')
-	const routes = [{ tag: 'Campaign Content', path: '/campaign-content' }, { tag: 'Campaign Settings', path: "/campaign-settings" }, { tag: 'Checkout', path: '/checkout' }, { tag: 'Inventory News', path: '/inventory-news' }, { tag: 'Case Studies', path: '/case-studies' }, { tag: 'Tracking Panel', path: '/tracking-panel' }]
+	const initialState = {
+		promotionURL: '',
+		marketingObjective: '',
+		targeting: '',
+		dailyBudget: '',
+		costPerClick: '',
+		companyName: '',
+		firstName: '',
+		lastName: '',
+		address1: '',
+		address2: '',
+		city: '',
+		state: '',
+		zipcode: '',
+		country: '',
+		image: ''
+	}
+	const [data, setData] = useState(initialState)
+	const routes = [{ tag: 'Campaign Content', path: '/campaign-content' }, { tag: 'Campaign Settings', path: "/campaign-settings" }, { tag: 'Checkout', path: '/checkout' }, { tag: 'Inventory News', path: '/inventory-news' }, { tag: 'Case Studies', path: '/case-studies' }, { tag: 'Tracking Panel', path: '/tracking-panel' }, { tag: 'My Campaigns', path: '/campaigns' }]
 
 	const handleSignOut = () => {
 		signOut(auth).then(() => {
@@ -38,7 +57,9 @@ export function AuthContextProvider({ children }) {
 	useEffect(() => {
 		if (user) {
 			const unsub = onSnapshot(doc(db, "advertiser_database", user.uid), (doc) => {
-				user.phoneNumber = doc.data().phone
+				if (doc.exists()) {
+					user.phoneNumber = doc.data().phone
+				}
 			});
 		}
 	}, [user]);
@@ -48,7 +69,9 @@ export function AuthContextProvider({ children }) {
 		onAuthStateChanged(auth, async (user) => {
 			if (user) {
 				const unsub = onSnapshot(doc(db, "advertiser_database", user.uid), (doc) => {
-					user.phoneNumber = doc.data().phone
+					if (doc.exists()) {
+						user.phoneNumber = doc.data().phone
+					}
 				});
 				setUser(user)
 			} else {
@@ -86,7 +109,7 @@ export function AuthContextProvider({ children }) {
 	}, [alert]);
 
 	return (
-		<AuthContext.Provider value={{ auth, handleSignIn, user, handleSignOut, handleSignUp, alert, setAlert, routes }}>
+		<AuthContext.Provider value={{ auth, handleSignIn, user, handleSignOut, handleSignUp, alert, setAlert, routes, data, setData, file, setFile, initialState }}>
 			{children}
 		</AuthContext.Provider>
 	);

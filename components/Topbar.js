@@ -13,7 +13,7 @@ const Topbar = ({ show, setShow }) => {
 				<div className='flex justify-between px-5 items-center h-20'>
 					{
 						routes && routes.map((nav) => {
-							return <Link href={nav.path} key={nav.path}><a className='cursor-pointer p-3 accent-color py-1 rounded-md'>{nav.tag}</a></Link>
+							return <Link href={nav.path} key={nav.path}><a className={router.pathname === nav.path ? 'cursor-pointer p-3 py-1 text-gray-900 font-bold' : 'cursor-pointer p-3 py-1 text-gray-400 font-bold'}>{nav.tag}</a></Link>
 						})
 					}
 				</div>
