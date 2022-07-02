@@ -37,7 +37,7 @@ export default function Home() {
             <button disabled={loading} onClick={signIn} className='flex items-center justify-center text-white font-bold bg-gray-900 duration-200 px-3 py-2 rounded-lg hover:bg-gray-700 mt-5 w-full'>{loading ? <Spinner /> : 'Sign In'}</button>
           </div>
           <div className='mt-3 font-bold text-right text-sm'>
-            <p>Don't have an account? <Link href={'/signup'}>Sign Up</Link></p>
+            <p>Don&#39;t have an account? <Link href={'/signup'}>Sign Up</Link></p>
           </div>
         </div>
       </div>
