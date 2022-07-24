@@ -12,6 +12,7 @@ export function AuthContextProvider({ children }) {
 	const router = useRouter()
 	const [file, setFile] = useState()
 	const [alert, setAlert] = useState('')
+	const [userData, setUserData] = useState()
 	const initialState = {
 		promotionURL: '',
 		marketingObjective: '',
@@ -30,7 +31,7 @@ export function AuthContextProvider({ children }) {
 		image: ''
 	}
 	const [data, setData] = useState(initialState)
-	const routes = [{ tag: 'Campaign Content', path: '/campaign-content' }, { tag: 'Campaign Settings', path: "/campaign-settings" }, { tag: 'Checkout', path: '/checkout' }, { tag: 'Inventory News', path: '/inventory-news' }, { tag: 'Case Studies', path: '/case-studies' }, { tag: 'Tracking Panel', path: '/tracking-panel' }, { tag: 'My Campaigns', path: '/campaigns' }]
+	const routes = [{ tag: 'Campaign Content', path: '/campaign-content' }, { tag: 'Campaign Settings', path: "/campaign-settings" }, { tag: 'Checkout', path: '/checkout' }, { tag: 'Inventory News', path: '/inventory-news' }, { tag: 'Case Studies', path: '/case-studies' }, { tag: 'Tracking Panel', path: 'https://infilatemediagroup296.offer18.com/m/signup_self_adv?r=&am=' }, { tag: 'My Campaigns', path: '/campaigns' }]
 
 	const handleSignOut = () => {
 		signOut(auth).then(() => {
@@ -58,7 +59,7 @@ export function AuthContextProvider({ children }) {
 		if (user) {
 			const unsub = onSnapshot(doc(db, "advertiser_database", user.uid), (doc) => {
 				if (doc.exists()) {
-					user.phoneNumber = doc.data().phone
+					setUserData(doc.data())
 				}
 			});
 		}
@@ -70,7 +71,8 @@ export function AuthContextProvider({ children }) {
 			if (user) {
 				const unsub = onSnapshot(doc(db, "advertiser_database", user.uid), (doc) => {
 					if (doc.exists()) {
-						user.phoneNumber = doc.data().phone
+						console.log(doc.data());
+						setUserData(doc.data())
 					}
 				});
 				setUser(user)
@@ -109,7 +111,7 @@ export function AuthContextProvider({ children }) {
 	}, [alert]);
 
 	return (
-		<AuthContext.Provider value={{ auth, handleSignIn, user, handleSignOut, handleSignUp, alert, setAlert, routes, data, setData, file, setFile, initialState }}>
+		<AuthContext.Provider value={{ auth, handleSignIn, user, handleSignOut, handleSignUp, alert, setAlert, routes, data, setData, file, setFile, initialState, userData }}>
 			{children}
 		</AuthContext.Provider>
 	);

@@ -4,6 +4,7 @@ import { useAuthContext } from "../context/Auth";
 // import InfilateLogo from "./InfilateLogo";
 import { useRouter } from 'next/router'
 import Alert from "./Alert";
+import InfilateLogo from "./InfilateLogo";
 
 const Sidebar = ({ setShow }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -14,7 +15,7 @@ const Sidebar = ({ setShow }) => {
       <Alert text={alert} />
       <div className="lg:block hidden fixed w-2/12 bg-white border-r top-6 shadow-xl h-screen p-3 pt-0 rounded-tl-3xl overflow-hidden">
         <div className="flex items-center h-20 justify-center">
-          {/* <h1 className="font-bold text-5xl text-center"><InfilateLogo /></h1> */}
+          <h1 className="font-bold text-5xl text-center"><InfilateLogo /></h1>
         </div>
         <div>
           <div className="flex flex-col items-center mt-8 Nunito">

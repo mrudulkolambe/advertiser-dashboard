@@ -9,15 +9,16 @@ import { db } from '../context/firebase_config'
 import { doc, updateDoc } from 'firebase/firestore'
 import Topbar from '../components/Topbar'
 import Sidebar from '../components/Sidebar'
+import Head from 'next/head'
 
 const ProfileEdit = () => {
 	const storage = getStorage();
 	const imageInput = useRef()
-	const { user, setAlert } = useAuthContext()
+	const { user, setAlert, userData } = useAuthContext()
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
 	const [name, setName] = useState(user && user.displayName)
-	const [phone, setPhone] = useState(user && user.phoneNumber)
+	const [phone, setPhone] = useState(userData && userData.phone)
 	const [photo, setPhoto] = useState(user && user.photoURL)
 	useEffect(() => {
 		if (user) {
@@ -91,6 +92,9 @@ const ProfileEdit = () => {
 	}
 	return (
 		<>
+			<Head>
+				<title>Advertiser | Profile Edit</title>
+			</Head>
 			<Sidebar />
 			<Topbar />
 			<div className='hidden lg:block left-position absolute top-24 mt-2 px-10 py-6 Nunito w-10/12 bg-white z-20'>
@@ -122,7 +126,7 @@ const ProfileEdit = () => {
 							<div className='mx-1 px-8 rounded-lg py-4 w-9/12 font-bold text-2xl'>{user && user.uid}</div>
 						</div>
 						<div className='mt-5 w-full flex justify-center'>
-							<button onClick={handleUpdate} className='bg-gray-900 text-white font-bold rounded-lg duration-300 hover:bg-gray-700 px-3 py-1'>{loading ? <Spinner/> : "Update"}</button>
+							<button onClick={handleUpdate} className='bg-gray-900 text-white font-bold rounded-lg duration-300 hover:bg-gray-700 px-3 py-1'>{loading ? <Spinner /> : "Update"}</button>
 						</div>
 					</div>
 				</div>

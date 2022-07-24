@@ -4,6 +4,7 @@ import Spinner from '../components/Spinner';
 import Topbar from "../components/Topbar";
 import { useAuthContext } from "../context/Auth";
 import Link from 'next/link'
+import Head from 'next/head'
 
 export default function Home() {
   const { handleSignUp } = useAuthContext()
@@ -21,6 +22,9 @@ export default function Home() {
   }
   return (
     <>
+    <Head>
+      <title>Advertiser | Sign Up</title>
+    </Head>
       <Sidebar />
       <Topbar />
       <div className='top-6 absolute left-position w-full h-20 bg-white rounded-tr-3xl'></div>

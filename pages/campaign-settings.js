@@ -3,6 +3,7 @@ import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import { useAuthContext } from '../context/Auth'
+import Head from 'next/head'
 
 const CampaignSettings = () => {
 	const { data, setData } = useAuthContext()
@@ -17,6 +18,9 @@ const CampaignSettings = () => {
 	}
 	return (
 		<>
+			<Head>
+				<title>Advertiser | Campaign Settings</title>
+			</Head>
 			<Sidebar />
 			<Topbar />
 			<div className='bg-white hidden lg:block left-position absolute top-24 mt-2 px-5 py-6 Nunito w-10/12 justify-center items-center h-calc-height overflow-scroll'>
@@ -39,10 +43,10 @@ const CampaignSettings = () => {
 						<div className="py-6 px-4 rounded-xl shadow-lg bg-white border-2 mt-10">
 							<h1 className=' font-bold text-2xl'>Budgeting</h1>
 							<p className='text-gray-500 mt-2'>Define the direct impact of your campaign&#39;s daily reach by setting your campaign budget</p>
-							<p className='font-bold mt-2 text-gray-500'>Daily Budget</p>
-							<input name="dailyBudget" id="" onChange={handleFormInput} value={data.dailyBudget} className='mt-1 p-3 rounded-lg border-2 w-full outline-none placeholder:font-bold' placeholder='Daily Budget' />
-							<p className='font-bold mt-2 text-gray-500'>Cost Per Click (CPC)</p>
-							<input name="costPerClick" id="" onChange={handleFormInput} value={data.costPerClick} className='mt-1 p-3 rounded-lg border-2 w-full outline-none placeholder:font-bold' placeholder='Cost Per Click' />
+							<p className='font-bold mt-2 text-gray-500'>Total Budget</p>
+							<input name="dailyBudget" id="" onChange={handleFormInput} value={data.dailyBudget} className='mt-1 p-3 rounded-lg border-2 w-full outline-none placeholder:font-bold' placeholder='Total Budget' />
+							<p className='font-bold mt-2 text-gray-500'>Cost Per Acquisition</p>
+							<input name="costPerClick" id="" onChange={handleFormInput} value={data.costPerClick} className='mt-1 p-3 rounded-lg border-2 w-full outline-none placeholder:font-bold' placeholder='Cost Per Acquisition' />
 						</div>
 					</div>
 					<div className='w-1/2 h-full'></div>

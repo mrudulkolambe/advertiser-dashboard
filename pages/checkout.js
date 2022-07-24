@@ -7,6 +7,7 @@ import { db } from '../context/firebase_config';
 import Spinner from '../components/Spinner'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const Checkout = () => {
 	const { data, setData, user, setAlert, file, setFile, initialState } = useAuthContext()
@@ -70,6 +71,9 @@ const Checkout = () => {
 	}
 	return (
 		<>
+			<Head>
+				<title>Advertiser | Checkout</title>
+			</Head>
 			<Sidebar />
 			<Topbar />
 			<div className='bg-white hidden lg:block left-position absolute top-24 mt-2 px-5 py-6 Nunito w-10/12 justify-center items-center h-calc-height overflow-scroll'>

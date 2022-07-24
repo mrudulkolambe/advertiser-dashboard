@@ -3,6 +3,7 @@ import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import { useAuthContext } from '../context/Auth'
+import Head from 'next/head'
 
 const CampaignContent = ({ edit }) => {
 	const { data, setData, file, setFile } = useAuthContext()
@@ -20,6 +21,9 @@ const CampaignContent = ({ edit }) => {
 	}
 	return (
 		<>
+			<Head>
+				<title>Advertiser | Campaign Content</title>
+			</Head>
 			<Sidebar />
 			<Topbar />
 			<div className='bg-white hidden lg:block left-position absolute top-24 mt-2 px-5 py-6 Nunito w-10/12 justify-center items-center h-calc-height'>

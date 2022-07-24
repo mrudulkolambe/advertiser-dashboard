@@ -5,6 +5,7 @@ import { useAuthContext } from '../context/Auth'
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from '../context/firebase_config';
 import AdvertiserCampaignCard from '../components/AdvertiserCampaignCard';
+import Head from 'next/head';
 
 
 const Campaigns = () => {
@@ -29,6 +30,9 @@ const Campaigns = () => {
 	}, [user]);
 	return (
 		<>
+			<Head>
+				<title>Advertiser | Campaigns</title>
+			</Head>
 			<Sidebar />
 			<Topbar />
 			<div className='bg-white hidden lg:block left-position absolute top-24 mt-2 px-5 py-6 Nunito w-10/12 justify-center items-center h-calc-height'>

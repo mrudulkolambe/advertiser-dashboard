@@ -4,6 +4,7 @@ import { useAuthContext } from "../context/Auth";
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Home() {
   const { handleSignIn } = useAuthContext()
@@ -19,6 +20,9 @@ export default function Home() {
   }
   return (
     <>
+    <Head>
+      <title>Advertiser | Profile Edit</title>
+    </Head>
       <Sidebar />
       <Topbar />
       <div className='top-6 absolute left-position w-full h-20 bg-white rounded-tr-3xl'></div>
